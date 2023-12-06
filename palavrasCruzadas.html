@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .letra {
+            width: 20px;
+            height: 20px;
+            border: solid rgb(69, 69, 69) 3px;
+            margin-top: 5px;
+        }
+
+        .inputVazio {
+            width: 20px;
+            height: 20px;
+            border: solid rgb(69, 69, 69) 3px;
+            opacity: 0;
+            margin-top: 5px;
+        }
+
+        .main {
+            width: 100%;
+            height: 98vh;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .inputs {
+            width: 70%;
+            height: 100%;
+            border-right: solid 2px #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div id="inputs" class="inputs">
+
+        </div>
+        <div class="opcoes">
+            <button onclick="enviar()">enviar</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var palavrasCruzadas = [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'D', 'U', 'A', 'L', ' ', 'C', 'O', 'R', 'E', 'P', 'R', 'O', 'M', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'M', ' ', ' ', ' ', ' ', ' ', ' ', 'E', ' ', ' ', ' ', ' ', 'E', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', 'G', ' ', ' ', ' ', ' ', 'M', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'D', ' ', ' ', ' ', ' ', ' ', ' ', 'I', '5', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'R', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' ', 'R', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'E', ' ', ' ', ' ', ' ', ' ', ' ', 'T', ' ', ' ', ' ', ' ', 'I', '7'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' ', ' ', ' ', 'R', ' ', ' ', ' ', ' ', 'A', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' ', 'F', 'L', 'A', 'S', 'H', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', 'Q', ' ', 'C', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'D', ' ', ' ', ' ', ' ', 'D', ' '],
+        [' ', ' ', ' ', ' ', ' ', 'U', 'L', 'A', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', 'E', ' '],
+        [' ', ' ', ' ', ' ', ' ', 'A', ' ', 'C', 'P', 'U', ' ', ' ', ' ', ' ', ' ', ' ', 'R', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', 'D', ' ', 'H', ' ', 'S', ' ', ' ', ' ', ' ', ' ', ' ', 'E', ' ', ' ', ' ', ' ', 'M', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', 'E', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' ', 'A', ' '],
+        [' ', ' ', ' ', ' ', ' ', 'C', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' '],
+        [' ', ' ', 'D', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'S', ' '],
+        [' ', ' ', 'A', ' ', ' ', 'R', 'O', 'M', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' '],
+        [' ', ' ', 'T', 'H', 'R', 'E', 'A', 'D', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'U', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', 'C', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    ];
+
+    var contadorLetra = 1;
+    var gabarito = [];
+
+    for (var linha = 0; linha < palavrasCruzadas.length; linha++) {
+        for (var coluna = 0; coluna < palavrasCruzadas[linha].length; coluna++) {
+            if ((palavrasCruzadas[linha])[coluna] == ' ') {
+                inputs.innerHTML += `
+                <input class="inputVazio" disabled="">
+                `
+            } else {
+                if (coluna % parseInt(Math.random() * 8 + 2) == 0) {
+                    inputs.innerHTML += `
+                        <input class="letra" value="${(palavrasCruzadas[linha])[coluna]}" disabled="">
+                        `
+                } else {
+                    inputs.innerHTML += `
+                        <input name="campoDigitacao" id="${contadorLetra}" class="letra">
+                        `
+                        contadorLetra += 1
+                        gabarito.push((palavrasCruzadas[linha])[coluna]);
+                }
+
+            }
+
+            if (coluna == palavrasCruzadas[linha].length - 1) {
+                inputs.innerHTML += `<br>`
+            }
+        }
+    };
+
+    function enviar(){
+        var corretos = 0;
+        var campos = document.getElementsByName('campoDigitacao');
+        console.log(campos)
+        for(i = 0; i < gabarito.length; i++){
+            if((campos[i].value).toUpperCase() == gabarito[i]){
+                corretos += 1
+            }
+        }
+
+        if(corretos == gabarito.length){
+            alert('parabéns, você é o cara (ou a cara)')
+        } else {
+            alert(`não foi dessa vez. Você acertou ${corretos} de ${gabarito.length}`)
+        }
+    }
+</script>
